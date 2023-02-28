@@ -1,0 +1,119 @@
+public class LinkL{                             
+    node head;
+    private int size;
+    LinkL(){
+        this.size=0;
+    }
+    class node{                      
+        String data;
+        node next;
+
+        node(String  val){
+            this.data=val;
+            this.next=null;                     
+        }
+    }  
+
+    public void add1st(String val){
+        node n1 = new node(val);
+        if(head==null){
+        head=n1;
+        return ;                           
+        }
+        n1.next=head;
+        head=n1;
+    }  
+
+    public void addLast(String val){
+        node n1 = new node(val);
+        if(head==null){
+            head = n1;
+            return;
+        }
+        node temp=head;
+        while(temp.next!=null){
+            temp=temp.next;
+        }
+        temp.next=n1;   
+    }
+
+    public void print(){
+        if(head==null){
+            System.out.println("List is empty");
+            return ;
+        }
+        node temp=head;
+        while(temp!=null){
+            System.out.print(temp.data+"->");
+            temp=temp.next;
+        } System.out.println("NULL");
+    }
+
+    public void del1st(){
+        if(head==null){
+            System.out.println("List is empty");
+            return;
+        }
+        head=head.next;
+    }
+
+    public void delLast(){
+        if(head==null){
+            System.out.println("List is empty");
+            return;
+        }
+        if(head.next==null){
+            head=null;
+            return ;
+        }
+        node secondL=head;
+        node last=head.next;
+        
+        while(last.next!=null){
+            last=last.next;
+            secondL=secondL.next;
+        }secondL.next=null;
+    }
+
+    public int getSize(){
+       if(head==null)
+       return 0;
+       node temp=head;
+       while(temp!=null){
+          size++;
+           temp=temp.next;
+       }return size;
+
+    }
+
+    public String getIndex(int index){
+        String s;
+        node temp  = head;
+        int i=0;
+        if(index>getSize())
+            System.out.println("INVALID INDEX");
+        while(i!=index){
+            temp=temp.next;
+        }s=temp.data;
+        return s;
+    }
+    
+    public static void main(String[] args) {
+        LinkL l1 = new LinkL();
+        l1.print();                      // List is empty
+        l1.add1st("Hello!");        
+        l1.print();                     // Hello!->NULL
+        l1.addLast("World");        
+        l1.print();                     //  Hello!->World->NULL
+        l1.add1st("Hello");        
+        l1.print();                  // Hello->Hello!->World->NULL
+        l1.del1st();                   
+        l1.print();                   // Hello!->World->NULL
+        l1.delLast();                   
+        l1.print();                  // Hello!->NULL
+        System.out.println(l1.getSize());    // 1
+        System.out.println(l1.getIndex(0));     // Hello!
+        l1.print();                  //Hello!->NULL
+
+    }
+}
